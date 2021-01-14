@@ -1,13 +1,13 @@
 <template>
-  <hello-world />
+  <search-field />
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue';
+import SearchField from '@/components/SearchField.vue';
 
 export default {
   name: 'App',
-  components: { HelloWorld },
+  components: { SearchField },
 };
 </script>
 
