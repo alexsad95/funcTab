@@ -1,8 +1,14 @@
 <template>
   <main>
     <div class="theme-gruvbox">
-      <div class="settings">
-        <a href="#" >
+      <settings-modal
+        v-if="isModalSettingsVisible"
+        @closeModal="closeSettingsModals"
+      />
+      <div class="settings-button">
+        <a href="#"
+          @click="showSettingsModals"
+        >
           <font-awesome-icon far class="fa-2x" icon="cog" />
         </a>
       </div>
@@ -17,12 +23,32 @@
 
 <script>
 import SearchField from '@/components/SearchField.vue';
+import SettingsModal from '@/components/SettingsModal.vue';
 import ChrApps from '@/components/ChrApps.vue';
 import BlockBookmarks from '@/components/Bookmarks.vue';
 
 export default {
   name: 'App',
-  components: { SearchField, ChrApps, BlockBookmarks },
+  components: {
+    SearchField,
+    ChrApps,
+    BlockBookmarks,
+    SettingsModal,
+  },
+  data() {
+    return {
+      isModalSettingsVisible: false,
+    };
+  },
+  computed: {},
+  methods: {
+    showSettingsModals() {
+      this.isModalSettingsVisible = true;
+    },
+    closeSettingsModals() {
+      this.isModalSettingsVisible = false;
+    },
+  },
 };
 </script>
 
@@ -45,7 +71,7 @@ main {
     flex: 1;
   }
 }
-.settings {
+.settings-button {
   display: block;
   position: fixed;
   top: 30px;
