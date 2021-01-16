@@ -5,9 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import App from './App.vue';
 
 library.add(faCog, faTimes);
-
 Vue.component('font-awesome-icon', FontAwesomeIcon);
-
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */

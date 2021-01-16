@@ -29,8 +29,9 @@ export default {
   outline: none;
 
   @include themify($themes) {
+    background-color: themed('anotherBackgroundColor');
     color: themed('hoverColor');
-    border: 2px solid themed('textColor');
+    border: 0px solid themed('textColor');
     &::-moz-placeholder {
       color: themed('textColor');
       opacity: 1;
@@ -42,7 +43,7 @@ export default {
       color: themed('textColor');
     }
     &[type=search]:focus {
-      border: 2px solid themed('hoverColor');
+      border: 1px solid themed('hoverColor');
       border-radius: none;
     }
     &[type=search]::-webkit-search-cancel-button {

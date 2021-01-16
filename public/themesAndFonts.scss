@@ -1,17 +1,20 @@
 /*
  * Theme definitions
  */
-
 $themes: (
   gruvbox: (
-    backgroundColor: #333333,
-    textColor: #808080,
-    hoverColor: #c3c634,
+    backgroundColor: #282828,
+    textColor: #aca185,
+    hoverColor: #b8bb26,
+    anotherColor: #d79921,
+    anotherBackgroundColor: #242424,
   ),
   gruvbox-light: (
-    backgroundColor: #f9f5d7,
-    textColor: #928374,
-    hoverColor: #8e9122,
+    backgroundColor: #fbf1c7,
+    textColor: #3c3836,
+    hoverColor: #98971a,
+    anotherColor: #d79921,
+    anotherBackgroundColor: #e1d8b2,
   ),
 );
 

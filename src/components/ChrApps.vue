@@ -51,9 +51,9 @@ export default {
   width: 100%;
   height: 100px;
   @include themify($themes) {
-    border: 2px solid themed('textColor');
+    border: 1px solid themed('textColor');
     &-cols {
-      border: 2px solid themed('textColor');
+      border: 1px solid themed('textColor');
     }
   }
 }

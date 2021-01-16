@@ -1,3 +1,8 @@
+<!--
+  TODO
+  18 line - Разобраться с закрытием модального нажатием на любую область вне окна
+-->
+
 <template>
   <main>
     <div class="theme-gruvbox">
@@ -5,6 +10,11 @@
         v-if="isModalSettingsVisible"
         @closeModal="closeSettingsModals"
       />
+      <div
+        class="bg_layer"
+        @click="isModalSettingsVisible ? closeSettingsModals : testMethod"
+        v-bind:style="{ 'z-index': isModalSettingsVisible ? '21' : '0' }"
+      ></div>
       <div class="settings-button">
         <a href="#"
           @click="showSettingsModals"
@@ -48,6 +58,9 @@ export default {
     closeSettingsModals() {
       this.isModalSettingsVisible = false;
     },
+    testMethod() {
+      console.log('testMethod');
+    },
   },
 };
 </script>
@@ -71,10 +84,22 @@ main {
     flex: 1;
   }
 }
+.bg_layer {
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.5;
+  & .show {
+    z-index: 21;
+  }
+}
 .settings-button {
   display: block;
   position: fixed;
   top: 30px;
+  z-index: 20;
   right: 5px;
   width: 5%;
   height: 5%;
@@ -86,6 +111,7 @@ main {
   display: flex;
   flex-direction: column;
   flex: 1;
+  z-index: 15;
   align-items: center;
   justify-content: center;
   font-size: 1.3rem;
