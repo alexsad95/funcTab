@@ -1,6 +1,11 @@
 <template>
   <main>
     <div class="theme-gruvbox">
+      <div class="settings">
+        <a href="#" >
+          <font-awesome-icon far class="fa-2x" icon="cog" />
+        </a>
+      </div>
       <div class="container">
         <search-field/>
         <block-bookmarks/>
@@ -38,6 +43,17 @@ main {
   > div {
     display: flex;
     flex: 1;
+  }
+}
+.settings {
+  display: block;
+  position: fixed;
+  top: 30px;
+  right: 5px;
+  width: 5%;
+  height: 5%;
+  @include themify($themes) {
+    background-color: themed('backgroundColor');
   }
 }
 .container {
