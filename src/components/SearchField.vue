@@ -16,8 +16,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../public/themesAndFonts';
 .inp {
-  color: #B6B6B6;
   padding: 10px;
   background: transparent;
   font-size: 1.3rem;
@@ -25,15 +25,29 @@ export default {
   height: 40px;
   transition: border-color 0.2s;
   box-sizing: border-box;
-  border: 2px solid gray;
   border-radius: 4px;
   outline: none;
-}
-.inp[type=search]:focus {
-  border: 2px solid #B6B6B6;
-  border-radius: none;
-}
-.inp[type="search"]::-webkit-search-cancel-button {
-  display: none;
+
+  @include themify($themes) {
+    color: themed('hoverColor');
+    border: 2px solid themed('textColor');
+    &::-moz-placeholder {
+      color: themed('textColor');
+      opacity: 1;
+    }
+    &::-ms-input-placeholder {
+      color: themed('textColor');
+    }
+    &::-webkit-input-placeholder {
+      color: themed('textColor');
+    }
+    &[type=search]:focus {
+      border: 2px solid themed('hoverColor');
+      border-radius: none;
+    }
+    &[type=search]::-webkit-search-cancel-button {
+      display: none;
+    }
+  }
 }
 </style>

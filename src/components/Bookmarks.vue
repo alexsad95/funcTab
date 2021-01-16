@@ -31,12 +31,14 @@ export default {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 30px;
-}
-.block-bookmarks-cols {
-  display: grid;
-  grid-gap: 20px;
-}
-.block-bookmarks-cols > a {
-  margin: 0% 30%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  &-cols {
+    display: grid;
+    grid-gap: 20px;
+  }
+  &-cols > a {
+    margin: 0% 30%;
+  }
 }
 </style>

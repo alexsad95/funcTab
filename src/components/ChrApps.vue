@@ -3,7 +3,7 @@
     <div class="block-apps-cols">
       <br>
       <a
-        style="margin: 30px; "
+        style="margin: 30px;"
         href="#"
         @click="bookmarksMethod()"
       >Test</a>
@@ -42,15 +42,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../public/themesAndFonts';
 .block-apps {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 30px;
-  border: 2px solid gray;
+  border-radius: 4px;
   width: 100%;
   height: 100px;
-}
-.block-apps-cols {
-  border: 2px solid gray;
+  @include themify($themes) {
+    border: 2px solid themed('textColor');
+    &-cols {
+      border: 2px solid themed('textColor');
+    }
+  }
 }
 </style>

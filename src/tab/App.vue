@@ -1,9 +1,13 @@
 <template>
-  <div class="container">
-    <search-field/>
-    <block-bookmarks/>
-    <chr-apps/>
-  </div>
+  <main>
+    <div class="theme-gruvbox">
+      <div class="container">
+        <search-field/>
+        <block-bookmarks/>
+        <chr-apps/>
+      </div>
+    </div>
+  </main>
 </template>
 
 <script>
@@ -17,30 +21,53 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+@import '../../public/themesAndFonts';
 body {
-  background-color: #333333;
+  margin: 0;
+}
+html, body {
+  height: 100%;
+}
+main {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  > div {
+    display: flex;
+    flex: 1;
+  }
 }
 .container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
   font-size: 1.3rem;
-  margin-top: 15%;
-  display: grid;
-  grid-template-columns: 20% 60% 20%;
-  grid-gap: 30px;
-}
-.container > div {
-  grid-column-start: 2;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
+  padding-left: 15%;
+  padding-right: 15%;
+  & > div {
+    grid-column-start: 2;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+  @include themify($themes) {
+    background-color: themed('backgroundColor');
+  }
 }
 a {
-  color: #B6B6B6;
   text-align: center;
   text-decoration: none;
-}
-a:hover {
-  text-decoration: none;
-  color: #C3C634;
+  @include themify($themes) {
+    color: themed('textColor');
+    &:hover {
+      text-decoration: none;
+      color: themed('hoverColor');
+    }
+  }
 }
 </style>
