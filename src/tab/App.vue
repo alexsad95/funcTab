@@ -1,15 +1,12 @@
-<!--
-  TODO
-  18 line - Разобраться с закрытием модального нажатием на любую область вне окна
--->
-
 <template>
   <main>
     <div class="theme-gruvbox">
-      <settings-modal
-        v-if="isModalSettingsVisible"
-        @closeModal="closeSettingsModals"
-      />
+      <transition name="fade">
+        <settings-modal
+          v-if="isModalSettingsVisible"
+          @closeModal="closeSettingsModals"
+        />
+      </transition>
       <div
         class="bg_layer"
         @click="isModalSettingsVisible ? closeSettingsModals : testMethod"
@@ -94,6 +91,12 @@ main {
   & .show {
     z-index: 21;
   }
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+  opacity: 0;
 }
 .settings-button {
   display: block;

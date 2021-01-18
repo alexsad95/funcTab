@@ -27,7 +27,6 @@ export default {
   box-sizing: border-box;
   border-radius: 4px;
   outline: none;
-
   @include themify($themes) {
     background-color: themed('anotherBackgroundColor');
     color: themed('hoverColor');
