@@ -1,6 +1,10 @@
 <template>
   <main>
-    <div class="theme-gruvbox">
+    <div
+      class="theme-gruvbox-dark"
+      :theme="theme"
+      @switchTheme="switchNewTheme(theme)"
+    >
       <transition name="fade">
         <settings-modal
           v-if="isModalSettingsVisible"
@@ -9,7 +13,7 @@
       </transition>
       <div
         class="bg_layer"
-        @click="isModalSettingsVisible ? closeSettingsModals : testMethod"
+        @click="closeSettingsModals"
         v-bind:style="{ 'z-index': isModalSettingsVisible ? '21' : '0' }"
       ></div>
       <div class="settings-button">
@@ -44,6 +48,7 @@ export default {
   },
   data() {
     return {
+      theme: 'gruvbox-dark',
       isModalSettingsVisible: false,
     };
   },
@@ -51,6 +56,10 @@ export default {
   methods: {
     showSettingsModals() {
       this.isModalSettingsVisible = true;
+    },
+    switchNewTheme(theme) {
+      console.log('event: ', theme);
+      // this.isModalSettingsVisible = true;
     },
     closeSettingsModals() {
       this.isModalSettingsVisible = false;
@@ -93,9 +102,9 @@ main {
   }
 }
 .fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+  transition: opacity .3s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+.fade-enter, .fade-leave-to {
   opacity: 0;
 }
 .settings-button {

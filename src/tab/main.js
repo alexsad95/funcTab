@@ -7,6 +7,8 @@ import App from './App.vue';
 library.add(faCog, faTimes);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;
+Vue.config.debug = true;
+Vue.config.devtools = true;
 
 /* eslint-disable no-new */
 new Vue({

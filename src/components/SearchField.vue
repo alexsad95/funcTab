@@ -26,6 +26,7 @@ export default {
   transition: border-color 0.2s;
   box-sizing: border-box;
   border-radius: 4px;
+  text-align: center;
   outline: none;
   @include themify($themes) {
     background-color: themed('anotherBackgroundColor');
@@ -40,6 +41,12 @@ export default {
     }
     &::-webkit-input-placeholder {
       color: themed('textColor');
+    }
+    &[type=search]::placeholder {
+      text-align: center;
+    }
+    &[type=search]:placeholder-shown {
+      text-align: left;
     }
     &[type=search]:focus {
       border: 1px solid themed('hoverColor');
