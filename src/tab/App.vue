@@ -1,24 +1,21 @@
 <template>
   <main>
     <div
-      class="theme-gruvbox-dark"
-      :theme="theme"
-      @switchTheme="switchNewTheme(theme)"
+      :class="'theme-'+THEME_STATE"
     >
       <transition name="fade">
         <settings-modal
-          v-if="isModalSettingsVisible"
-          @closeModal="closeSettingsModals"
+          v-if="MODAL_SETTINGS_STATE"
         />
       </transition>
       <div
         class="bg_layer"
-        @click="closeSettingsModals"
-        v-bind:style="{ 'z-index': isModalSettingsVisible ? '21' : '0' }"
+        @click="toogleModal"
+        v-bind:style="{ 'z-index': MODAL_SETTINGS_STATE ? '21' : '0' }"
       ></div>
       <div class="settings-button">
         <a href="#"
-          @click="showSettingsModals"
+          @click="toogleModal"
         >
           <font-awesome-icon far class="fa-2x" icon="cog" />
         </a>
@@ -37,6 +34,7 @@ import SearchField from '@/components/SearchField.vue';
 import SettingsModal from '@/components/SettingsModal.vue';
 import ChrApps from '@/components/ChrApps.vue';
 import BlockBookmarks from '@/components/Bookmarks.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'App',
@@ -46,26 +44,19 @@ export default {
     BlockBookmarks,
     SettingsModal,
   },
-  data() {
-    return {
-      theme: 'gruvbox-dark',
-      isModalSettingsVisible: false,
-    };
+  computed: {
+    ...mapGetters([
+      'THEME_STATE',
+      'MODAL_SETTINGS_STATE',
+    ]),
   },
-  computed: {},
   methods: {
-    showSettingsModals() {
-      this.isModalSettingsVisible = true;
-    },
-    switchNewTheme(theme) {
-      console.log('event: ', theme);
-      // this.isModalSettingsVisible = true;
-    },
-    closeSettingsModals() {
-      this.isModalSettingsVisible = false;
-    },
-    testMethod() {
-      console.log('testMethod');
+    ...mapActions([
+      'changeTheme',
+      'changeModal',
+    ]),
+    toogleModal() {
+      this.changeModal();
     },
   },
 };

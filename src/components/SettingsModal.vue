@@ -1,6 +1,6 @@
 <template>
   <div class="settings-modal">
-    <a href="#" class="closeIcon" @click="closeModal">
+    <a href="#" class="closeIcon" @click="toogleModal">
       <font-awesome-icon far class="fa-2x" icon="times" />
     </a>
     <div class="tab-container">
@@ -13,7 +13,7 @@
       <div id="general" class="tab-container-body settings">
         <div class="theme">
           <h4>Theme</h4>
-          <select @change="switchTheme($event)" v-model="theme">
+          <select @change="switchTheme($event)" :value="theme">
             <option>gruvbox-dark</option>
             <option>gruvbox-light</option>
           </select>
@@ -49,19 +49,36 @@
   </div>
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: 'SettingsModal',
-  data() {
-    return {
-      theme: 'gruvbox-dark',
-    };
+  computed: {
+    ...mapGetters([
+      'THEME_STATE',
+      'MODAL_SETTINGS_STATE',
+    ]),
+    theme: {
+      get() {
+        return this.THEME_STATE;
+      },
+      set(newTheme) {
+        this.THEME_STATE = newTheme;
+      },
+    },
   },
   methods: {
-    closeModal() {
-      this.$emit('closeModal');
+    ...mapActions([
+      'changeTheme',
+      'changeModal',
+    ]),
+    toogleModal() {
+      this.changeModal();
+    },
+    switchTheme(event) {
+      this.changeTheme(event.target.value);
     },
     switchSettings(settingName) {
-      console.log(this.theme);
       const tabline = document.getElementsByClassName('tablink');
       const x = document.getElementsByClassName('settings');
 
@@ -75,12 +92,6 @@ export default {
       }
       document.getElementsByClassName(settingName)[0].className = `tablink ${settingName} active`;
     },
-    switchTheme(event) {
-      this.theme = event.target.value;
-      this.$emit('switchTheme', event.target.value);
-    },
-  },
-  computed: {
   },
 };
 </script>
