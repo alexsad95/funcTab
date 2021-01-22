@@ -23,7 +23,7 @@
       <div class="container">
         <search-field/>
         <block-bookmarks/>
-        <chr-apps/>
+        <!-- <chr-apps/> -->
       </div>
     </div>
   </main>
@@ -32,7 +32,7 @@
 <script>
 import SearchField from '@/components/SearchField.vue';
 import SettingsModal from '@/components/SettingsModal.vue';
-import ChrApps from '@/components/ChrApps.vue';
+// import ChrApps from '@/components/ChrApps.vue';
 import BlockBookmarks from '@/components/Bookmarks.vue';
 import { mapGetters, mapActions } from 'vuex';
 
@@ -40,7 +40,7 @@ export default {
   name: 'App',
   components: {
     SearchField,
-    ChrApps,
+    // ChrApps,
     BlockBookmarks,
     SettingsModal,
   },
