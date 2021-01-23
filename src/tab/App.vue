@@ -67,8 +67,11 @@ export default {
 body {
   margin: 0;
 }
-html, body {
+html, body, input, select{
   height: 100%;
+  font-family: 'Iosevka';
+  font-weight: normal;
+  font-size: 14px;
 }
 main {
   margin: 0;

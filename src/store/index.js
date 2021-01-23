@@ -6,6 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     theme: 'gruvbox-dark',
+    font: 'Iosevka',
+    size: 14,
     isModalSettingsVisible: false,
   },
   getters: {

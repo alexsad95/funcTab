@@ -1,0 +1,80 @@
+@font-face {
+  font-family: 'bedstead';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../resources/bedstead/bedstead.otf');
+}
+@font-face {
+  font-family: 'firacode';
+  font-weight: bold;
+  font-style: normal;
+  src: url('../resources/firacode/firacode-bold.woff');
+}
+@font-face {
+  font-family: 'firacode';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../resources/firacode/firacode.woff');
+}
+@font-face {
+  font-family: 'hermit';
+  font-weight: bold;
+  font-style: normal;
+  src: url('../resources/hermit/hermit-bold.otf');
+}
+@font-face {
+  font-family: 'hermit';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../resources/hermit/hermit.otf');
+}
+@font-face {
+  font-family: 'iosevka';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../resources/iosevka/iosevka.woff');
+}
+@font-face {
+  font-family: 'iosevka';
+  font-weight: normal;
+  font-style: italic;
+  src: url('../resources/iosevka/iosevka-italic.woff');
+}
+@font-face {
+  font-family: 'iosevka';
+  font-weight: bold;
+  font-style: normal;
+  src: url('../resources/iosevka/iosevka-bold.woff');
+}
+@font-face {
+  font-family: 'iosevka';
+  font-weight: bold;
+  font-style: italic;
+  src: url('../resources/iosevka/iosevka-bold-italic.woff');
+}
+@font-face {
+  font-family: 'mononoki';
+  font-weight: bold;
+  font-style: italic;
+  src: url('../resources/mononoki/mononoki-bold-italic.woff');
+}
+@font-face {
+  font-family: 'mononoki';
+  font-weight: bold;
+  font-style: normal;
+  src: url('../resources/mononoki/mononoki-bold.woff');
+}
+@font-face {
+  font-family: 'mononoki';
+  font-weight: normal;
+  font-style: italic;
+  src: url('../resources/mononoki/mononoki-italic.woff');
+}
+@font-face {
+  font-family: 'mononoki';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../resources/mononoki/mononoki.woff');
+}
+
+/*# sourceMappingURL=fonts.css.map */
