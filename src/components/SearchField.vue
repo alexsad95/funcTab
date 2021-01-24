@@ -2,15 +2,23 @@
   <div class="search-form">
     <form method="get" action="https://google.com/search?">
       <input class="inp" name="q" type="search" placeholder="Search"
-        autofocus autocomplete='off' accesskey="s">
+        autofocus autocomplete='off' accesskey="s"
+        :style="{fontFamily: FONT_STATE, fontSize: SIZE_STATE + 'px'}"
+        >
     </form>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'SearchField',
   computed: {
+    ...mapGetters([
+      'FONT_STATE',
+      'SIZE_STATE',
+    ]),
   },
 };
 </script>
@@ -20,7 +28,6 @@ export default {
 .inp {
   padding: 10px;
   background: transparent;
-  font-size: 1.3rem;
   width: 100%;
   height: 40px;
   transition: border-color 0.2s;

@@ -30,14 +30,10 @@ export default {
 .block-bookmarks {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 30px;
   margin: 5% 0%;
   &-cols {
     display: grid;
     grid-gap: 20px;
-  }
-  &-cols > a {
-    margin: 0% 30%;
   }
 }
 </style>

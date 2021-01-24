@@ -1,7 +1,7 @@
 <template>
   <div class="settings-modal">
     <a href="#" class="closeIcon" @click="toogleModal">
-      <font-awesome-icon far class="fa-2x" icon="times" />
+      <font-awesome-icon icon="times" />
     </a>
     <div class="tab-container">
       <div class="tab-row">
@@ -10,18 +10,33 @@
         <div @click="switchSettings('other')" class="tablink other">Other</div>
       </div>
 
-      <div id="general" class="tab-container-body settings">
+      <div
+        id="general"
+        class="tab-container-body settings"
+        :style="{fontFamily: FONT_STATE}"
+      >
         <div class="theme">
           <h4>Theme</h4>
-          <select @change="switchTheme($event)" :value="theme">
+          <select
+            @change="switchTheme($event)"
+            :value="themes"
+            :style="{ fontFamily: FONT_STATE }"
+          >
             <option>gruvbox-dark</option>
             <option>gruvbox-light</option>
           </select>
         </div>
         <div class="font">
           <h4>Font</h4>
-          <select>
-            <option>Ioveska</option>
+          <select
+            @change="switchFonts($event)"
+            :value="fonts"
+            :style="{ fontFamily: FONT_STATE }"
+          >
+            <option>Bedstead</option>
+            <option>Firacode</option>
+            <option>Hermit</option>
+            <option>Iosevka</option>
             <option>Mononoki</option>
           </select>
         </div>
@@ -31,9 +46,10 @@
             type="number"
             id="font-size"
             name="quantity"
-            min="8"
-            max="20"
-            value="14"
+            min="12"
+            max="26"
+            @change="switchSize($event)" :value="size"
+            :style="{ fontFamily: FONT_STATE }"
           >
         </div>
       </div>
@@ -56,9 +72,11 @@ export default {
   computed: {
     ...mapGetters([
       'THEME_STATE',
+      'FONT_STATE',
+      'SIZE_STATE',
       'MODAL_SETTINGS_STATE',
     ]),
-    theme: {
+    themes: {
       get() {
         return this.THEME_STATE;
       },
@@ -66,17 +84,41 @@ export default {
         this.THEME_STATE = newTheme;
       },
     },
+    fonts: {
+      get() {
+        return this.FONT_STATE;
+      },
+      set(newFont) {
+        this.FONT_STATE = newFont;
+      },
+    },
+    size: {
+      get() {
+        return this.SIZE_STATE;
+      },
+      set(newSize) {
+        this.SIZE_STATE = newSize;
+      },
+    },
   },
   methods: {
     ...mapActions([
-      'changeTheme',
+      'changeThemes',
+      'changeFonts',
+      'changeSize',
       'changeModal',
     ]),
     toogleModal() {
       this.changeModal();
     },
     switchTheme(event) {
-      this.changeTheme(event.target.value);
+      this.changeThemes(event.target.value);
+    },
+    switchFonts(event) {
+      this.changeFonts(event.target.value);
+    },
+    switchSize(event) {
+      this.changeSize(event.target.value);
     },
     switchSettings(settingName) {
       const tabline = document.getElementsByClassName('tablink');
@@ -102,6 +144,8 @@ export default {
   position: absolute;
   opacity: 1;
   z-index: 9999;
+  font-size: 18px;
+  font-weight: normal;
   height: 400px;
   width: 600px;
   left: 50%;
@@ -159,7 +203,7 @@ export default {
       gap: 0.2rem;
       margin: 0px 30px;
       text-align: left;
-      grid-template-columns: 100px 80px 0px;
+      grid-template-columns: 100px 40px 0px;
     }
     & .tab-container-body select, & .tab-container-body input {
       font-size: 1.0rem;

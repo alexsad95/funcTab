@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     theme: 'gruvbox-dark',
     font: 'Iosevka',
-    size: 14,
+    size: 21,
     isModalSettingsVisible: false,
   },
   getters: {
@@ -17,10 +17,22 @@ export default new Vuex.Store({
     MODAL_SETTINGS_STATE(state) {
       return state.isModalSettingsVisible;
     },
+    FONT_STATE(state) {
+      return state.font;
+    },
+    SIZE_STATE(state) {
+      return state.size;
+    },
   },
   mutations: {
-    CHANGE_THEME(state, theme) {
+    CHANGE_THEMES(state, theme) {
       state.theme = theme;
+    },
+    CHANGE_FONTS(state, font) {
+      state.font = font;
+    },
+    CHANGE_SIZE(state, size) {
+      state.size = size;
     },
     TOOGLE_SETTINGS(state) {
       state.isModalSettingsVisible = !state.isModalSettingsVisible;
@@ -28,11 +40,17 @@ export default new Vuex.Store({
 
   },
   actions: {
-    async changeTheme({ commit }, payload) {
-      commit('CHANGE_THEME', payload);
+    async changeThemes({ commit }, payload) {
+      commit('CHANGE_THEMES', payload);
     },
     async changeModal({ commit }) {
       commit('TOOGLE_SETTINGS');
+    },
+    async changeFonts({ commit }, payload) {
+      commit('CHANGE_FONTS', payload);
+    },
+    async changeSize({ commit }, payload) {
+      commit('CHANGE_SIZE', payload);
     },
   },
   modules: {

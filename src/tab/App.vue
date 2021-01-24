@@ -2,6 +2,7 @@
   <main>
     <div
       :class="'theme-'+THEME_STATE"
+      :style="{fontFamily: FONT_STATE, fontSize: SIZE_STATE + 'px'}"
     >
       <transition name="fade">
         <settings-modal
@@ -11,13 +12,13 @@
       <div
         class="bg_layer"
         @click="toogleModal"
-        v-bind:style="{ 'z-index': MODAL_SETTINGS_STATE ? '21' : '0' }"
+        :style="{ 'z-index': MODAL_SETTINGS_STATE ? '21' : '0'}"
       ></div>
       <div class="settings-button">
         <a href="#"
           @click="toogleModal"
         >
-          <font-awesome-icon far class="fa-2x" icon="cog" />
+          <font-awesome-icon icon="cog" />
         </a>
       </div>
       <div class="container">
@@ -46,13 +47,14 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'FONT_STATE',
+      'SIZE_STATE',
       'THEME_STATE',
       'MODAL_SETTINGS_STATE',
     ]),
   },
   methods: {
     ...mapActions([
-      'changeTheme',
       'changeModal',
     ]),
     toogleModal() {
@@ -67,11 +69,12 @@ export default {
 body {
   margin: 0;
 }
+
 html, body, input, select{
   height: 100%;
+  width: 100%;
   font-family: 'Iosevka';
   font-weight: normal;
-  font-size: 14px;
 }
 main {
   margin: 0;
@@ -80,7 +83,7 @@ main {
   display: flex;
   flex-direction: column;
   > div {
-    display: flex;
+    display: contents;
     flex: 1;
   }
 }
@@ -120,13 +123,10 @@ main {
   z-index: 15;
   align-items: center;
   justify-content: center;
-  font-size: 1.3rem;
   padding-left: 15%;
   padding-right: 15%;
   & > div {
     grid-column-start: 2;
-    margin-left: auto;
-    margin-right: auto;
     width: 100%;
   }
   @include themify($themes) {
