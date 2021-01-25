@@ -125,7 +125,7 @@ main {
   top: 30px;
   z-index: 20;
   right: 5px;
-  width: 60px;
+  width: 10%;
   height: 5%;
   @include themify($themes) {
     background-color: themed('backgroundColor');

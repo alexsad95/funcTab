@@ -22,8 +22,17 @@
             :value="themes"
             :style="{ fontFamily: FONT_STATE }"
           >
+            <option>aether</option>
+            <option>arch</option>
+            <option>carbon</option>
+            <option>dark</option>
             <option>gruvbox-dark</option>
             <option>gruvbox-light</option>
+            <option>joker</option>
+            <option>matrix</option>
+            <option>monokai</option>
+            <option>nord</option>
+            <option>paper</option>
           </select>
         </div>
         <div class="font">
