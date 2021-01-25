@@ -1,12 +1,6 @@
 <template>
   <div class="block-apps">
     <div class="block-apps-cols">
-      <br>
-      <a
-        style="margin: 30px;"
-        href="#"
-        @click="bookmarksMethod()"
-      >Test</a>
     </div>
     <div class="block-apps-cols">
     </div>
@@ -23,18 +17,6 @@
 export default {
   name: 'ChrApps',
   methods: {
-    bookmarksMethod() {
-      chrome.bookmarks.getTree((bookmarks) => this.printBookmarks(bookmarks));
-    },
-    printBookmarks(bookmarks) {
-      console.log('bookmarks: ', bookmarks);
-      bookmarks.forEach((bookmark) => {
-        if (bookmark.children) {
-          console.log('folder name: ', bookmark.title);
-          this.printBookmarks(bookmark.children);
-        }
-      });
-    },
   },
   computed: {
   },

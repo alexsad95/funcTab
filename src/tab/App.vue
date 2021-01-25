@@ -1,30 +1,29 @@
 <template>
   <main>
     <div
-      :class="'theme-'+THEME_STATE"
-      :style="{fontFamily: FONT_STATE, fontSize: SIZE_STATE + 'px'}"
+      :class="'theme-' + THEME_STATE"
+      :style="{ fontFamily: FONT_STATE, fontSize: SIZE_STATE + 'px' }"
     >
       <transition name="fade">
-        <settings-modal
-          v-if="MODAL_SETTINGS_STATE"
-        />
+        <settings-modal v-if="MODAL_SETTINGS_STATE" />
       </transition>
       <div
         class="bg_layer"
         @click="toogleModal"
-        :style="{ 'z-index': MODAL_SETTINGS_STATE ? '21' : '0'}"
+        :style="{ 'z-index': MODAL_SETTINGS_STATE ? '21' : '0' }"
       ></div>
       <div class="settings-button">
-        <a href="#"
-          @click="toogleModal"
-        >
+        <a href="#" @click="testFuncOn">
+          <font-awesome-icon icon="grimace" />
+        </a>
+        <a href="#" @click="toogleModal">
           <font-awesome-icon icon="cog" />
         </a>
       </div>
       <div class="container">
-        <search-field/>
-        <block-bookmarks/>
-        <!-- <chr-apps/> -->
+        <search-field />
+        <block-bookmarks />
+        <!-- <chr-apps /> -->
       </div>
     </div>
   </main>
@@ -56,21 +55,37 @@ export default {
   methods: {
     ...mapActions([
       'changeModal',
+      'testFunc',
     ]),
     toogleModal() {
       this.changeModal();
+    },
+    testFuncOnasd() {
+      this.testFunc();
+    },
+    testFuncOn() {
+      chrome.bookmarks.getTree((bookmarks) => this.printBookmarks(bookmarks));
+    },
+    printBookmarks(bookmarks) {
+      console.log('bookmarks: ', bookmarks);
+      bookmarks.forEach((bookmark) => {
+        if (bookmark.children) {
+          console.log('folder name: ', bookmark.title);
+          this.printBookmarks(bookmark.children);
+        }
+      });
     },
   },
 };
 </script>
 
 <style lang="scss">
-@import '../../public/themesAndFonts';
+@import "../../public/themesAndFonts";
 body {
   margin: 0;
 }
 
-html, body, input, select{
+html, body, input, select {
   height: 100%;
   width: 100%;
   font-family: 'Iosevka';
@@ -99,7 +114,7 @@ main {
   }
 }
 .fade-enter-active, .fade-leave-active {
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }
 .fade-enter, .fade-leave-to {
   opacity: 0;
@@ -110,7 +125,7 @@ main {
   top: 30px;
   z-index: 20;
   right: 5px;
-  width: 5%;
+  width: 60px;
   height: 5%;
   @include themify($themes) {
     background-color: themed('backgroundColor');
@@ -136,6 +151,7 @@ main {
 a {
   text-align: center;
   text-decoration: none;
+  padding: 0px 5px;
   @include themify($themes) {
     color: themed('textColor');
     &:hover {
