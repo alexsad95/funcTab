@@ -13,7 +13,7 @@
       <div
         id="general"
         class="tab-container-body settings"
-        :style="{fontFamily: FONT_STATE}"
+        :style="{ fontFamily: FONT_STATE }"
       >
         <div class="theme">
           <h4>Theme</h4>
@@ -63,8 +63,14 @@
         </div>
       </div>
 
-      <div id="components" class="tab-container-body settings" style="display:none">
-        <h3>Components</h3>
+      <div
+        id="components"
+        class="tab-container-body settings"
+        style="display: none"
+      >
+        <div class="bookmarks">
+          <div @click="changeComponents" class="button">Change</div>
+        </div>
       </div>
 
       <div id="other" class="tab-container-body settings" style="display:none">
@@ -116,9 +122,14 @@ export default {
       'changeFonts',
       'changeSize',
       'changeModal',
+      'changeComponents',
     ]),
     toogleModal() {
       this.changeModal();
+    },
+    changeComponents() {
+      this.changeModal();
+      this.changeComponents();
     },
     switchTheme(event) {
       this.changeThemes(event.target.value);
@@ -197,9 +208,9 @@ export default {
     & .tab-container-body {
       padding: 0px 40px;
     }
-    & .tab-container-body .font, .theme, .size {
+    & .tab-container-body .font, .theme, .size, .bookmarks {
       display: grid;
-      grid-auto-flow: column;
+    grid-auto-flow: column;
       gap: 0.2rem;
       margin: 0px 30px;
       height: 35px;
@@ -213,6 +224,15 @@ export default {
       margin: 0px 30px;
       text-align: left;
       grid-template-columns: 100px 40px 0px;
+    }
+    & .tab-container-body .button {
+      width: 70%;
+      margin: 5%;
+      padding: 5%;
+      background-color: themed('anotherBackgroundColor');
+      border-radius: 2px;
+      text-align: center;
+      cursor: pointer;
     }
     & .tab-container-body select, & .tab-container-body input {
       font-size: 1.0rem;

@@ -60,9 +60,6 @@ export default {
     toogleModal() {
       this.changeModal();
     },
-    testFuncOnasd() {
-      this.testFunc();
-    },
     testFuncOn() {
       chrome.bookmarks.getTree((bookmarks) => this.printBookmarks(bookmarks));
     },
