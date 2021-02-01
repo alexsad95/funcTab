@@ -10,18 +10,10 @@
         <div @click="switchSettings('other')" class="tablink other">Other</div>
       </div>
 
-      <div
-        id="general"
-        class="tab-container-body settings"
-        :style="{ fontFamily: FONT_STATE }"
-      >
+      <div id="general" class="tab-container-body settings" :style="{ fontFamily: FONT_STATE }">
         <div class="theme">
           <h4>Theme</h4>
-          <select
-            @change="switchTheme($event)"
-            :value="themes"
-            :style="{ fontFamily: FONT_STATE }"
-          >
+          <select @change="switchTheme($event)" :value="themes" :style="{ fontFamily: FONT_STATE }">
             <option>aether</option>
             <option>arch</option>
             <option>carbon</option>
@@ -37,11 +29,7 @@
         </div>
         <div class="font">
           <h4>Font</h4>
-          <select
-            @change="switchFonts($event)"
-            :value="fonts"
-            :style="{ fontFamily: FONT_STATE }"
-          >
+          <select @change="switchFonts($event)" :value="fonts" :style="{ fontFamily: FONT_STATE }">
             <option>Bedstead</option>
             <option>Firacode</option>
             <option>Hermit</option>
@@ -55,25 +43,22 @@
             type="number"
             id="font-size"
             name="quantity"
-            min="12"
+            min="15"
             max="26"
-            @change="switchSize($event)" :value="size"
+            @change="switchSize($event)"
+            :value="size"
             :style="{ fontFamily: FONT_STATE }"
-          >
+          />
         </div>
       </div>
 
-      <div
-        id="components"
-        class="tab-container-body settings"
-        style="display: none"
-      >
+      <div id="components" class="tab-container-body settings" style="display: none">
         <div class="bookmarks">
-          <div @click="changeComponents" class="button">Change</div>
+          <div @click="changeComponentsExample" class="button">Change</div>
         </div>
       </div>
 
-      <div id="other" class="tab-container-body settings" style="display:none">
+      <div id="other" class="tab-container-body settings" style="display: none">
         <h3>Other</h3>
       </div>
     </div>
@@ -85,12 +70,7 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'SettingsModal',
   computed: {
-    ...mapGetters([
-      'THEME_STATE',
-      'FONT_STATE',
-      'SIZE_STATE',
-      'MODAL_SETTINGS_STATE',
-    ]),
+    ...mapGetters(['THEME_STATE', 'FONT_STATE', 'SIZE_STATE']),
     themes: {
       get() {
         return this.THEME_STATE;
@@ -117,18 +97,11 @@ export default {
     },
   },
   methods: {
-    ...mapActions([
-      'changeThemes',
-      'changeFonts',
-      'changeSize',
-      'changeModal',
-      'changeComponents',
-    ]),
+    ...mapActions(['changeThemes', 'changeFonts', 'changeSize', 'changeModal', 'changeComponents']),
     toogleModal() {
       this.changeModal();
     },
-    changeComponents() {
-      this.changeModal();
+    changeComponentsExample() {
       this.changeComponents();
     },
     switchTheme(event) {
@@ -177,7 +150,7 @@ export default {
     background-color: themed('backgroundColor');
     color: themed('textColor');
     & .tab-container {
-      font-size: 1.0rem;
+      font-size: 1rem;
     }
     & .closeIcon {
       position: absolute;
@@ -188,7 +161,7 @@ export default {
       display: grid;
       grid-auto-flow: column;
       grid-auto-columns: 1fr;
-      gap: .2rem;
+      gap: 0.2rem;
       grid-area: buttons;
       margin: 30px 40px;
       text-align: center;
@@ -208,9 +181,12 @@ export default {
     & .tab-container-body {
       padding: 0px 40px;
     }
-    & .tab-container-body .font, .theme, .size, .bookmarks {
+    & .tab-container-body .font,
+    .theme,
+    .size,
+    .bookmarks {
       display: grid;
-    grid-auto-flow: column;
+      grid-auto-flow: column;
       gap: 0.2rem;
       margin: 0px 30px;
       height: 35px;
@@ -234,8 +210,9 @@ export default {
       text-align: center;
       cursor: pointer;
     }
-    & .tab-container-body select, & .tab-container-body input {
-      font-size: 1.0rem;
+    & .tab-container-body select,
+    & .tab-container-body input {
+      font-size: 1rem;
       height: 25px;
       margin: 15px;
       color: themed('textColor');

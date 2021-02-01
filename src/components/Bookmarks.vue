@@ -1,39 +1,46 @@
 <template>
-  <div class="block-bookmarks">
-    <div class="block-bookmarks-cols">
-      <a href="http://vk.com">vk</a>
-      <a href="http://github.com">github</a>
-      <a href="http://youtube.com">youtube</a>
-    </div>
-    <div class="block-bookmarks-cols">
-      <a href="https://reddit.com/">reddit</a>
-      <a href="https://www.twitch.tv/">twitch</a>
-      <a href="https://www.instagram.com/">instagram</a>
-    </div>
-    <div class="block-bookmarks-cols">
-      <a href="https://www.codota.com/code/javascript">codotaJsSearch</a>
-      <a href="https://monkeytype.com/">monkeytype</a>
-      <a href="https://sideprojectlist.co/">sideProjectList</a>
+  <div class="blocks" :style="{ gridTemplateColumns: `repeat(${BLOCK_STATE.cols}, 1fr)` }">
+    <div class="blocks-bookmarks" v-for="(blocks, index) in BLOCK_STATE.value" :key="index">
+      <p class="text" :style="{ fontSize: `${SIZE_STATE - 3}px` }">
+        {{ blocks.name }}
+      </p>
+      <div class="blocks-bookmarks-cols" v-for="(links, index) in blocks.value" :key="index">
+        <a :href="links.href">{{ links.text }}</a>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'BlockBookmarks',
   computed: {
+    ...mapGetters(['SIZE_STATE', 'BLOCK_STATE']),
   },
+  methods: {},
 };
 </script>
 
 <style lang="scss" scoped>
-.block-bookmarks {
+@import '../../public/themesAndFonts';
+.blocks {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin: 5% 0%;
-  &-cols {
-    display: grid;
-    grid-gap: 20px;
+  margin: 2% 0%;
+  border-radius: 4px;
+  @include themify($themes) {
+    background-color: themed('anotherBackgroundColor');
+    &-bookmarks {
+      text-align: center;
+      &-cols {
+        margin: 5% 0%;
+      }
+    }
+    .text {
+      color: themed('hoverColor');
+      // font-size: 15px;
+    }
   }
 }
 </style>

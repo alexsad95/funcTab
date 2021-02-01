@@ -55,7 +55,6 @@ export default {
   methods: {
     ...mapActions([
       'changeModal',
-      'testFunc',
     ]),
     toogleModal() {
       this.changeModal();

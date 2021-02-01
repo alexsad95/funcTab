@@ -38,7 +38,7 @@ export default {
   @include themify($themes) {
     background-color: themed('anotherBackgroundColor');
     color: themed('hoverColor');
-    border: 0px solid themed('textColor');
+    border: 0px;
     &::-moz-placeholder {
       color: themed('textColor');
       opacity: 1;

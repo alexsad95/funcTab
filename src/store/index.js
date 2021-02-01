@@ -4,6 +4,9 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  state: {
+    isModalSettingsVisible: false,
+  },
   getters: {
     THEME_STATE(state) {
       state.theme = Vue.localStorage.theme;
@@ -18,8 +21,11 @@ export default new Vuex.Store({
       return state.size;
     },
     MODAL_SETTINGS_STATE(state) {
-      state.isModalSettingsVisible = Vue.localStorage.isModalSettingsVisible;
       return state.isModalSettingsVisible;
+    },
+    BLOCK_STATE(state) {
+      state.blocks = Vue.localStorage.bookmarkBlocks;
+      return state.blocks;
     },
   },
   mutations: {
@@ -36,11 +42,9 @@ export default new Vuex.Store({
       state.size = size;
     },
     TOOGLE_SETTINGS(state) {
-      Vue.localStorage.isModalSettingsVisible = !state.isModalSettingsVisible;
       state.isModalSettingsVisible = !state.isModalSettingsVisible;
     },
     CHANGE_COMPONENTS(state) {
-      Vue.localStorage.isModalSettingsVisible = !state.isModalSettingsVisible;
       state.isModalSettingsVisible = !state.isModalSettingsVisible;
     },
 
@@ -59,7 +63,7 @@ export default new Vuex.Store({
       commit('TOOGLE_SETTINGS');
     },
     async changeComponents({ commit }) {
-      // commit('CHANGE_COMPONENTS');
+      commit('CHANGE_COMPONENTS');
     },
   },
   modules: {
