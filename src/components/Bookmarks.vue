@@ -39,7 +39,6 @@ export default {
     }
     .text {
       color: themed('hoverColor');
-      // font-size: 15px;
     }
   }
 }

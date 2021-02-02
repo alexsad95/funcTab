@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isModalSettingsVisible: false,
+    changeComponents: false,
   },
   getters: {
     THEME_STATE(state) {
@@ -27,6 +28,9 @@ export default new Vuex.Store({
       state.blocks = Vue.localStorage.bookmarkBlocks;
       return state.blocks;
     },
+    COMPONENTS_CHANGE_STATE(state) {
+      return state.changeComponents;
+    },
   },
   mutations: {
     CHANGE_THEMES(state, theme) {
@@ -45,7 +49,8 @@ export default new Vuex.Store({
       state.isModalSettingsVisible = !state.isModalSettingsVisible;
     },
     CHANGE_COMPONENTS(state) {
-      state.isModalSettingsVisible = !state.isModalSettingsVisible;
+      console.log('state-blocks: ', state.blocks);
+      state.changeComponents = true;
     },
 
   },
@@ -62,7 +67,8 @@ export default new Vuex.Store({
     async changeModal({ commit }) {
       commit('TOOGLE_SETTINGS');
     },
-    async changeComponents({ commit }) {
+    async changeComponents({ dispatch, commit }) {
+      await dispatch('changeModal');
       commit('CHANGE_COMPONENTS');
     },
   },

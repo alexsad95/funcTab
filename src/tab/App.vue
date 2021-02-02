@@ -50,6 +50,7 @@ export default {
       'SIZE_STATE',
       'THEME_STATE',
       'MODAL_SETTINGS_STATE',
+      'COMPONENTS_CHANGE_STATE',
     ]),
   },
   methods: {
