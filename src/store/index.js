@@ -49,8 +49,11 @@ export default new Vuex.Store({
       state.isModalSettingsVisible = !state.isModalSettingsVisible;
     },
     CHANGE_COMPONENTS(state) {
-      console.log('state-blocks: ', state.blocks);
-      state.changeComponents = true;
+      state.changeComponents = !state.changeComponents;
+    },
+    CHANGE_BLOCKS(state, newStateBlock) {
+      Vue.localStorage.bookmarkBlocks = newStateBlock;
+      state.blocks = newStateBlock;
     },
 
   },
@@ -67,9 +70,12 @@ export default new Vuex.Store({
     async changeModal({ commit }) {
       commit('TOOGLE_SETTINGS');
     },
-    async changeComponents({ dispatch, commit }) {
-      await dispatch('changeModal');
+    async changeComponents({ commit }) {
+      // commit('TOOGLE_SETTINGS');
       commit('CHANGE_COMPONENTS');
+    },
+    async changeStateBlocks({ commit }, payload) {
+      commit('CHANGE_BLOCKS', payload);
     },
   },
   modules: {

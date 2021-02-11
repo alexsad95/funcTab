@@ -22,8 +22,10 @@
       </div>
       <div class="container">
         <search-field />
-        <block-bookmarks />
-        <!-- <chr-apps /> -->
+
+        <change-block-bookmarks v-if="COMPONENTS_CHANGE_STATE" />
+        <block-bookmarks v-else />
+        <!-- <chrome-apps /> -->
       </div>
     </div>
   </main>
@@ -32,16 +34,18 @@
 <script>
 import SearchField from '@/components/SearchField.vue';
 import SettingsModal from '@/components/SettingsModal.vue';
-// import ChrApps from '@/components/ChrApps.vue';
+// import ChromeApps from '@/components/ChromeApps.vue';
 import BlockBookmarks from '@/components/Bookmarks.vue';
+import ChangeBlockBookmarks from '@/components/ChangeBookmarks.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'App',
   components: {
     SearchField,
-    // ChrApps,
+    // ChromeApps,
     BlockBookmarks,
+    ChangeBlockBookmarks,
     SettingsModal,
   },
   computed: {
@@ -54,9 +58,7 @@ export default {
     ]),
   },
   methods: {
-    ...mapActions([
-      'changeModal',
-    ]),
+    ...mapActions(['changeModal']),
     toogleModal() {
       this.changeModal();
     },
@@ -77,12 +79,18 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../public/themesAndFonts";
+@import '../../public/themesAndFonts';
 body {
   margin: 0;
 }
 
-html, body, input, select {
+html,
+body,
+input,
+select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   height: 100%;
   width: 100%;
   font-family: 'Iosevka';
@@ -110,10 +118,12 @@ main {
     z-index: 21;
   }
 }
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.3s;
 }
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 .settings-button {

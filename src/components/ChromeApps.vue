@@ -1,25 +1,18 @@
 <template>
   <div class="block-apps">
-    <div class="block-apps-cols">
-    </div>
-    <div class="block-apps-cols">
-    </div>
-    <div class="block-apps-cols">
-    </div>
-    <div class="block-apps-cols">
-    </div>
-    <div class="block-apps-cols">
-    </div>
+    <div class="block-apps-cols"></div>
+    <div class="block-apps-cols"></div>
+    <div class="block-apps-cols"></div>
+    <div class="block-apps-cols"></div>
+    <div class="block-apps-cols"></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ChrApps',
-  methods: {
-  },
-  computed: {
-  },
+  name: 'ChromeApps',
+  methods: {},
+  computed: {},
 };
 </script>
 

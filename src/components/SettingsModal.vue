@@ -102,6 +102,7 @@ export default {
       this.changeModal();
     },
     changeComponentsExample() {
+      this.changeModal();
       this.changeComponents();
     },
     switchTheme(event) {
@@ -225,11 +226,11 @@ export default {
       &:focus {
         border: 1px solid themed('hoverColor');
       }
-      select option:hover {
-        background: linear-gradient(#000000, #000000);
-        background-color: #000000 !important;
-        color: #ffed00 !important;
-      }
+      // select option:hover {
+      //   background: linear-gradient(#000000, #000000);
+      //   background-color: #000000 !important;
+      //   color: #ffed00 !important;
+      // }
     }
   }
 }
