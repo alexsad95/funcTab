@@ -10,7 +10,32 @@
     >
       <Draggable class="blocks-bookmarks" v-for="(blocks, index) in blockState.value" :key="index">
         <p class="text" :style="{ fontSize: `${SIZE_STATE - 3}px` }">
-          <span :style="{ fontSize: `${SIZE_STATE}px` }" class="column-drag-handle">&#x2630;</span>
+          <a
+            href="#"
+            class="column-drag-handle icons-info"
+            :style="{ fontSize: `${SIZE_STATE - 8}px` }"
+            data-title="Move block"
+          >
+            <font-awesome-icon icon="arrows-alt" />
+          </a>
+          <a
+            href="#"
+            :style="{ fontSize: `${SIZE_STATE - 8}px` }"
+            class="change icons-info"
+            data-title="Change block"
+            @click="changeLink(link.text)"
+          >
+            <font-awesome-icon icon="edit" />
+          </a>
+          <a
+            href="#"
+            :style="{ fontSize: `${SIZE_STATE - 8}px` }"
+            class="remove icons-info"
+            data-title="Remove block"
+            @click="removeLink(link.text)"
+          >
+            <font-awesome-icon icon="trash-alt" />
+          </a>
           {{ blocks.name }}
         </p>
         <Container
@@ -20,21 +45,48 @@
           @drag-start="handleDragLinkStart($event, blocks.name)"
           @drop="handleDropLink($event, blocks.name)"
         >
-          <Draggable v-for="(links, index) in blocks.value" :key="index">
+          <Draggable v-for="(link, index) in blocks.value" :key="index">
             <div class="blocks-bookmarks-cols">
-              <span class="column-drag-handle link">&#x2630;</span>
-              {{ links.text }}
+              <a
+                href="#"
+                class="column-drag-handle link icons-info"
+                :style="{ fontSize: `${SIZE_STATE - 8}px` }"
+                data-title="Move link"
+              >
+                <font-awesome-icon icon="arrows-alt" />
+              </a>
+              <a
+                href="#"
+                :style="{ fontSize: `${SIZE_STATE - 8}px` }"
+                class="change link icons-info"
+                @click="changeLink(link.text)"
+                data-title="Change link"
+              >
+                <font-awesome-icon icon="edit" />
+              </a>
+              <a
+                href="#"
+                :style="{ fontSize: `${SIZE_STATE - 8}px` }"
+                class="remove link icons-info"
+                @click="removeLink(link.text)"
+                data-title="Remove link"
+              >
+                <font-awesome-icon icon="trash-alt" />
+              </a>
+              {{ link.text }}
             </div>
           </Draggable>
         </Container>
       </Draggable>
     </Container>
-    <a href="#" @click="saveChanges">
-      <font-awesome-icon icon="save" />
-    </a>
-    <a href="#" @click="closeChanges">
-      <font-awesome-icon icon="window-close" />
-    </a>
+    <div class="actions-block">
+      <a href="#" @click="saveChanges" class="icons-info" data-title="Save all change">
+        <font-awesome-icon icon="save" />
+      </a>
+      <a href="#" @click="closeChanges" class="icons-info" data-title="Cancel changes">
+        <font-awesome-icon icon="window-close" />
+      </a>
+    </div>
   </div>
 </template>
 
@@ -60,6 +112,12 @@ export default {
   },
   methods: {
     ...mapActions(['changeStateBlocks', 'changeComponents']),
+    changeLink(link) {
+      console.log('changeLink__:', link);
+    },
+    removeLink(link) {
+      console.log('removeLink__:', link);
+    },
     handleDropBlock(dropResult) {
       const { removedIndex, addedIndex } = dropResult;
       const movedBlock = this.blockState.value.splice(removedIndex, 1);
@@ -131,12 +189,45 @@ export default {
     .column-drag-handle {
       color: themed('textColor');
       float: left;
-      padding: 0 0 0 2%;
+      padding: 5px 0 0 9px;
       cursor: move;
     }
-    .link {
-      padding: 0 0 0 1%;
+    .change {
+      color: themed('textColor');
+      float: left;
+      padding: 5px 0 0 5px;
+      cursor: pointer;
     }
+    .remove {
+      color: themed('textColor');
+      float: left;
+      padding: 5px 0 0 5px;
+      cursor: pointer;
+    }
+    .link {
+      padding: 5px 0 0 5px;
+    }
+  }
+}
+.icons-info:hover::after {
+  @include themify($themes) {
+    content: attr(data-title);
+    position: absolute;
+    z-index: 21;
+    margin-left: 5px;
+    margin-top: 10px;
+    background: themed('backgroundColor');
+    color: themed('textColor');
+    border: 1px solid themed('textColor');
+    border-radius: 2px;
+    font-size: 13px;
+    padding: 5px 10px;
+    pointer-events: none;
+  }
+  .actions-block {
+    position: fixed;
+    top: 10px;
+    left: 5px;
   }
 }
 </style>

@@ -71,7 +71,6 @@ export default new Vuex.Store({
       commit('TOOGLE_SETTINGS');
     },
     async changeComponents({ commit }) {
-      // commit('TOOGLE_SETTINGS');
       commit('CHANGE_COMPONENTS');
     },
     async changeStateBlocks({ commit }, payload) {

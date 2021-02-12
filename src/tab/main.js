@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-  faCog, faTimes, faGrimace, faSave, faWindowClose,
+  faCog, faTimes, faGrimace, faSave, faWindowClose, faEdit, faArrowsAlt, faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import devtools from '@vue/devtools'; // eslint-disable-line import/no-extraneous-dependencies
@@ -10,7 +10,7 @@ import store from '../store';
 import App from './App.vue';
 
 Vue.use(VueLocalStorage);
-library.add(faCog, faTimes, faGrimace, faSave, faWindowClose);
+library.add(faCog, faTimes, faGrimace, faSave, faWindowClose, faEdit, faArrowsAlt, faTrashAlt);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;
 if (process.env.NODE_ENV === 'development') {
