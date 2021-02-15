@@ -13,10 +13,10 @@
         :style="{ 'z-index': MODAL_SETTINGS_STATE ? '21' : '0' }"
       ></div>
       <div class="settings-button">
-        <a href="#" @click="testFuncOn">
+        <a href="#" @click="testFuncOn" class="icons-info" data-title="Test button">
           <font-awesome-icon icon="grimace" />
         </a>
-        <a href="#" @click="toogleModal">
+        <a href="#" @click="toogleModal" class="icons-info" data-title="Settings">
           <font-awesome-icon icon="cog" />
         </a>
       </div>
@@ -165,6 +165,27 @@ a {
       text-decoration: none;
       color: themed('hoverColor');
     }
+  }
+}
+.icons-info:hover::after {
+  @include themify($themes) {
+    content: attr(data-title);
+    position: absolute;
+    z-index: 21;
+    margin-left: 5px;
+    margin-top: 10px;
+    background: themed('backgroundColor');
+    color: themed('textColor');
+    border: 1px solid themed('textColor');
+    border-radius: 2px;
+    font-size: 13px;
+    padding: 5px 10px;
+    pointer-events: none;
+  }
+  .actions-block {
+    position: fixed;
+    top: 10px;
+    left: 5px;
   }
 }
 </style>

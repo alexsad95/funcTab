@@ -6,7 +6,6 @@
     <div class="tab-container">
       <div class="tab-row">
         <div @click="switchSettings('general')" class="tablink general active">General</div>
-        <div @click="switchSettings('components')" class="tablink components">Components</div>
         <div @click="switchSettings('other')" class="tablink other">Other</div>
       </div>
 
@@ -50,14 +49,11 @@
             :style="{ fontFamily: FONT_STATE }"
           />
         </div>
-      </div>
-
-      <div id="components" class="tab-container-body settings" style="display: none">
         <div class="bookmarks">
+          <h4>Changes in components</h4>
           <div @click="changeComponentsExample" class="button">Change</div>
         </div>
       </div>
-
       <div id="other" class="tab-container-body settings" style="display: none">
         <h3>Other</h3>
       </div>
@@ -183,31 +179,38 @@ export default {
       padding: 0px 40px;
     }
     & .tab-container-body .font,
-    .theme,
-    .size,
+    .theme {
+      display: grid;
+      grid-auto-flow: column;
+      gap: 0.2rem;
+      margin: 0px 30px;
+      height: 30px;
+      text-align: left;
+      grid-template-columns: 255px 200px 0px;
+    }
     .bookmarks {
       display: grid;
       grid-auto-flow: column;
       gap: 0.2rem;
       margin: 0px 30px;
-      height: 35px;
+      height: 30px;
       text-align: left;
-      grid-template-columns: 100px 200px 0px;
+      grid-template-columns: 255px 110px 0px;
     }
     & .tab-container-body .size {
       display: grid;
       grid-auto-flow: column;
       gap: 0.2rem;
       margin: 0px 30px;
+      height: 30px;
       text-align: left;
-      grid-template-columns: 100px 40px 0px;
+      grid-template-columns: 255px 50px 0px;
     }
     & .tab-container-body .button {
-      width: 70%;
-      margin: 5%;
-      padding: 5%;
+      margin: 20px 15px;
+      padding: 0px;
       background-color: themed('anotherBackgroundColor');
-      border-radius: 2px;
+      border-radius: 4px;
       text-align: center;
       cursor: pointer;
     }

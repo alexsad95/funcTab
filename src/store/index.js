@@ -49,7 +49,10 @@ export default new Vuex.Store({
       state.isModalSettingsVisible = !state.isModalSettingsVisible;
     },
     CHANGE_COMPONENTS(state) {
-      state.changeComponents = !state.changeComponents;
+      state.changeComponents = true;
+    },
+    CLOSE_CHANGE_COMPONENTS(state) {
+      state.changeComponents = false;
     },
     CHANGE_BLOCKS(state, newStateBlock) {
       Vue.localStorage.bookmarkBlocks = newStateBlock;
@@ -72,6 +75,9 @@ export default new Vuex.Store({
     },
     async changeComponents({ commit }) {
       commit('CHANGE_COMPONENTS');
+    },
+    async closeChangeComponents({ commit }) {
+      commit('CLOSE_CHANGE_COMPONENTS');
     },
     async changeStateBlocks({ commit }, payload) {
       commit('CHANGE_BLOCKS', payload);

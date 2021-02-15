@@ -1,5 +1,7 @@
 <template>
   <div>
+    <!-- Blocks with links -->
+
     <Container
       orientation="horizontal"
       drag-handle-selector=".column-drag-handle"
@@ -38,6 +40,9 @@
           </a>
           {{ blocks.name }}
         </p>
+
+        <!-- Links -->
+
         <Container
           group-name="trello"
           drag-handle-selector=".column-drag-handle"
@@ -68,7 +73,7 @@
                 href="#"
                 :style="{ fontSize: `${SIZE_STATE - 8}px` }"
                 class="remove link icons-info"
-                @click="removeLink(link.text)"
+                @click="removeLink(blocks.name, link.text, index)"
                 data-title="Remove link"
               >
                 <font-awesome-icon icon="trash-alt" />
@@ -111,12 +116,12 @@ export default {
     ...mapGetters(['SIZE_STATE', 'BLOCK_STATE']),
   },
   methods: {
-    ...mapActions(['changeStateBlocks', 'changeComponents']),
+    ...mapActions(['changeStateBlocks', 'closeChangeComponents']),
     changeLink(link) {
       console.log('changeLink__:', link);
     },
-    removeLink(link) {
-      console.log('removeLink__:', link);
+    removeLink(blockName, linkName, index) {
+      this.blockState.value.find((block) => block.name === blockName).value.splice(index, 1);
     },
     handleDropBlock(dropResult) {
       const { removedIndex, addedIndex } = dropResult;
@@ -154,10 +159,10 @@ export default {
     },
     saveChanges() {
       this.changeStateBlocks(this.blockState);
-      this.changeComponents();
+      this.closeChangeComponents();
     },
     closeChanges() {
-      this.changeComponents();
+      this.closeChangeComponents();
     },
   },
 };
@@ -207,27 +212,6 @@ export default {
     .link {
       padding: 5px 0 0 5px;
     }
-  }
-}
-.icons-info:hover::after {
-  @include themify($themes) {
-    content: attr(data-title);
-    position: absolute;
-    z-index: 21;
-    margin-left: 5px;
-    margin-top: 10px;
-    background: themed('backgroundColor');
-    color: themed('textColor');
-    border: 1px solid themed('textColor');
-    border-radius: 2px;
-    font-size: 13px;
-    padding: 5px 10px;
-    pointer-events: none;
-  }
-  .actions-block {
-    position: fixed;
-    top: 10px;
-    left: 5px;
   }
 }
 </style>
