@@ -171,7 +171,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../public/themesAndFonts';
 .blocks {
-  display: grid;
+  display: grid !important;
   margin: 2% 0%;
   @include themify($themes) {
     background-color: themed('anotherBackgroundColor');
