@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isModalSettingsVisible: false,
+    isChangeFormVisible: false,
     changeComponents: false,
   },
   getters: {
@@ -31,6 +32,9 @@ export default new Vuex.Store({
     COMPONENTS_CHANGE_STATE(state) {
       return state.changeComponents;
     },
+    FORM_CHANGE_STATE(state) {
+      return state.isChangeFormVisible;
+    },
   },
   mutations: {
     CHANGE_THEMES(state, theme) {
@@ -45,20 +49,22 @@ export default new Vuex.Store({
       Vue.localStorage.size = size;
       state.size = size;
     },
-    TOOGLE_SETTINGS(state) {
-      state.isModalSettingsVisible = !state.isModalSettingsVisible;
-    },
-    CHANGE_COMPONENTS(state) {
-      state.changeComponents = true;
-    },
-    CLOSE_CHANGE_COMPONENTS(state) {
-      state.changeComponents = false;
-    },
     CHANGE_BLOCKS(state, newStateBlock) {
       Vue.localStorage.bookmarkBlocks = newStateBlock;
       state.blocks = newStateBlock;
     },
-
+    CHANGE_COMPONENTS(state) {
+      state.changeComponents = true;
+    },
+    OPEN_MODAL(state, modalName) {
+      state[modalName] = true;
+    },
+    CLOSE_MODAL(state, modalName) {
+      state[modalName] = false;
+    },
+    CLOSE_CHANGE_COMPONENTS(state) {
+      state.changeComponents = false;
+    },
   },
   actions: {
     async changeThemes({ commit }, payload) {
@@ -70,14 +76,17 @@ export default new Vuex.Store({
     async changeSize({ commit }, payload) {
       commit('CHANGE_SIZE', payload);
     },
-    async changeModal({ commit }) {
-      commit('TOOGLE_SETTINGS');
-    },
     async changeComponents({ commit }) {
       commit('CHANGE_COMPONENTS');
     },
     async closeChangeComponents({ commit }) {
       commit('CLOSE_CHANGE_COMPONENTS');
+    },
+    async closeModal({ commit }, payload) {
+      commit('CLOSE_MODAL', payload);
+    },
+    async openModal({ commit }, payload) {
+      commit('OPEN_MODAL', payload);
     },
     async changeStateBlocks({ commit }, payload) {
       commit('CHANGE_BLOCKS', payload);

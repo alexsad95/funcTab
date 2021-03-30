@@ -64,7 +64,7 @@
                 href="#"
                 :style="{ fontSize: `${SIZE_STATE - 8}px` }"
                 class="change link icons-info"
-                @click="changeLink(link.text)"
+                @click="changeLink(blocks.name, link)"
                 data-title="Change link"
               >
                 <font-awesome-icon icon="edit" />
@@ -116,10 +116,7 @@ export default {
     ...mapGetters(['SIZE_STATE', 'BLOCK_STATE']),
   },
   methods: {
-    ...mapActions(['changeStateBlocks', 'closeChangeComponents']),
-    changeLink(link) {
-      console.log('changeLink__:', link);
-    },
+    ...mapActions(['changeStateBlocks', 'closeChangeComponents', 'openModal']),
     removeLink(blockName, linkName, index) {
       this.blockState.value.find((block) => block.name === blockName).value.splice(index, 1);
     },
@@ -163,6 +160,12 @@ export default {
     },
     closeChanges() {
       this.closeChangeComponents();
+    },
+    async changeLink(block, link) {
+      await this.openModal('isChangeFormVisible');
+      const form = document.querySelector('.change_bookmark_form');
+      form.children[0].value = link.text;
+      form.children[1].value = link.href;
     },
   },
 };

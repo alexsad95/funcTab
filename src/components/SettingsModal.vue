@@ -1,6 +1,6 @@
 <template>
   <div class="settings-modal">
-    <a href="#" class="closeIcon" @click="toogleModal">
+    <a href="#" class="closeIcon" @click="closeSettingsModal">
       <font-awesome-icon icon="times" />
     </a>
     <div class="tab-container">
@@ -93,12 +93,12 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['changeThemes', 'changeFonts', 'changeSize', 'changeModal', 'changeComponents']),
-    toogleModal() {
-      this.changeModal();
+    ...mapActions(['changeThemes', 'changeFonts', 'changeSize', 'closeModal', 'changeComponents']),
+    closeSettingsModal() {
+      this.closeModal('isModalSettingsVisible');
     },
     changeComponentsExample() {
-      this.changeModal();
+      this.closeModal('isModalSettingsVisible');
       this.changeComponents();
     },
     switchTheme(event) {

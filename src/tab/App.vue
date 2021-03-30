@@ -7,16 +7,18 @@
       <transition name="fade">
         <settings-modal v-if="MODAL_SETTINGS_STATE" />
       </transition>
+      <form-for-change v-if="FORM_CHANGE_STATE" />
+
       <div
         class="bg_layer"
-        @click="toogleModal"
-        :style="{ 'z-index': MODAL_SETTINGS_STATE ? '21' : '0' }"
+        @click="closeAllModal"
+        :style="{ 'z-index': MODAL_SETTINGS_STATE || FORM_CHANGE_STATE ? '21' : '0' }"
       ></div>
       <div class="settings-button">
         <a href="#" @click="testFuncOn" class="icons-info" data-title="Test button">
           <font-awesome-icon icon="grimace" />
         </a>
-        <a href="#" @click="toogleModal" class="icons-info" data-title="Settings">
+        <a href="#" @click="openModalSettings" class="icons-info" data-title="Settings">
           <font-awesome-icon icon="cog" />
         </a>
       </div>
@@ -37,6 +39,7 @@ import SettingsModal from '@/components/SettingsModal.vue';
 // import ChromeApps from '@/components/ChromeApps.vue';
 import BlockBookmarks from '@/components/Bookmarks.vue';
 import ChangeBlockBookmarks from '@/components/ChangeBookmarks.vue';
+import FormForChange from '@/components/FormForChange.vue';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -47,6 +50,7 @@ export default {
     BlockBookmarks,
     ChangeBlockBookmarks,
     SettingsModal,
+    FormForChange,
   },
   computed: {
     ...mapGetters([
@@ -55,12 +59,17 @@ export default {
       'THEME_STATE',
       'MODAL_SETTINGS_STATE',
       'COMPONENTS_CHANGE_STATE',
+      'FORM_CHANGE_STATE',
     ]),
   },
   methods: {
-    ...mapActions(['changeModal']),
-    toogleModal() {
-      this.changeModal();
+    ...mapActions(['openModal', 'closeModal', 'changeForm']),
+    closeAllModal() {
+      this.closeModal('isModalSettingsVisible');
+      this.closeModal('isChangeFormVisible');
+    },
+    openModalSettings() {
+      this.openModal('isModalSettingsVisible');
     },
     testFuncOn() {
       chrome.bookmarks.getTree((bookmarks) => this.printBookmarks(bookmarks));
