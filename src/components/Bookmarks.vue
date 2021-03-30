@@ -23,23 +23,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import '../../public/themesAndFonts';
-.blocks {
-  display: grid;
-  margin: 2% 0%;
-  border-radius: 4px;
-  @include themify($themes) {
-    background-color: themed('anotherBackgroundColor');
-    &-bookmarks {
-      text-align: center;
-      &-cols {
-        margin: 5% 0%;
-      }
-    }
-    .text {
-      color: themed('hoverColor');
-    }
-  }
-}
-</style>
+<style lang="scss" scoped src="../../public/scss/bookmarks.scss"></style>

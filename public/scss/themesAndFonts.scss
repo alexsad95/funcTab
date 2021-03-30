@@ -1,0 +1,108 @@
+/*
+ * Theme definitions
+ */
+$themes: (
+  arch: (
+    backgroundColor: #0C0D11,
+    textColor: #F6F5F5,
+    hoverColor: #7EBAB5,
+    anotherColor: #454864,
+    anotherBackgroundColor: #0B0C0F,
+  ),
+  aether: (
+    backgroundColor: #101820,
+    textColor: #EEDAEA,
+    hoverColor: #CF6BDD,
+    anotherColor: #EEDAEA,
+    anotherBackgroundColor: #0E161D,
+  ),
+  carbon: (
+    backgroundColor: #313131,
+    textColor: #616161,
+    hoverColor: #F66E0D,
+    anotherColor: #F66E0D,
+    anotherBackgroundColor: #2C2C2C,
+  ),
+  dark: (
+    backgroundColor: #111111,
+    textColor: #EEEEEE,
+    hoverColor: #444444,
+    anotherColor: #444444,
+    anotherBackgroundColor: #0F0F0F,
+  ),
+  gruvbox-dark: (
+    backgroundColor: #282828,
+    textColor: #aca185,
+    hoverColor: #b8bb26,
+    anotherColor: #d79921,
+    anotherBackgroundColor: #242424,
+  ),
+  gruvbox-light: (
+    backgroundColor: #fbf1c7,
+    textColor: #3c3836,
+    hoverColor: #98971a,
+    anotherColor: #d79921,
+    anotherBackgroundColor: #e1d8b2,
+  ),
+  joker: (
+    backgroundColor: #1A0E25,
+    textColor: #513871,
+    hoverColor: #99DE1E,
+    anotherColor: #99DE1E,
+    anotherBackgroundColor: #170D21,
+  ),
+  matrix: (
+    backgroundColor: #111111,
+    textColor: #15FF00,
+    hoverColor: #15FF00,
+    anotherColor: #15FF00,
+    anotherBackgroundColor: #0F0F0F,
+  ),
+  monokai: (
+    backgroundColor: #272822,
+    textColor: #E6DB74,
+    hoverColor: #A6E22E,
+    anotherColor: #A6E22E,
+    anotherBackgroundColor: #23241F,
+  ),
+  nord: (
+    backgroundColor: #242933,
+    textColor: #617B94,
+    hoverColor: #D8DEE9,
+    anotherColor: #D8DEE9,
+    anotherBackgroundColor: #20252E,
+  ),
+  paper: (
+    backgroundColor: #EEEEEE,
+    textColor: #B2B2B2,
+    hoverColor: #444444,
+    anotherColor: #444444,
+    anotherBackgroundColor: #D6D6D6,
+  ),
+);
+
+/*
+ * Implementation of themes
+ */
+@mixin themify($themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
