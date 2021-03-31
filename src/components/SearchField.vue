@@ -26,4 +26,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped src="../../public/scss/searchField.scss"></style>
+<style lang="scss" src="../../public/scss/searchField.scss"></style>
