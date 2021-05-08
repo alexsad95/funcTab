@@ -3,7 +3,7 @@
 .form-for-change-bookmarks {
   position: absolute;
   opacity: 1;
-  z-index: 99999;
+  z-index: 20;
   font-weight: normal;
   height: 220px;
   width: 600px;
@@ -30,8 +30,8 @@
       display: grid;
       grid-auto-flow: row;
       grid-auto-columns: 1fr;
-      gap: 1.2rem;
-      margin: 15px 80px;
+      gap: 0.5rem;
+      margin: 10px 80px;
       max-width: 450px;
     }
     .panel-button {

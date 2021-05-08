@@ -8,6 +8,10 @@ export default new Vuex.Store({
     isModalSettingsVisible: false,
     isChangeFormVisible: false,
     changeComponents: false,
+    changeBookmarks: {
+      url: '',
+      name: '',
+    },
   },
   getters: {
     THEME_STATE(state) {
@@ -35,6 +39,12 @@ export default new Vuex.Store({
     FORM_CHANGE_STATE(state) {
       return state.isChangeFormVisible;
     },
+    BOOKMARKS_URL_STATE(state) {
+      return state.changeBookmarks.url;
+    },
+    BOOKMARKS_NAME_STATE(state) {
+      return state.changeBookmarks.name;
+    },
   },
   mutations: {
     CHANGE_THEMES(state, theme) {
@@ -52,6 +62,9 @@ export default new Vuex.Store({
     CHANGE_BLOCKS(state, newStateBlock) {
       Vue.localStorage.bookmarkBlocks = newStateBlock;
       state.blocks = newStateBlock;
+    },
+    CHANGE_BOOKMARKS(state, newBookmark) {
+      state.changeBookmarks = newBookmark;
     },
     CHANGE_COMPONENTS(state) {
       state.changeComponents = true;
@@ -90,6 +103,9 @@ export default new Vuex.Store({
     },
     async changeStateBlocks({ commit }, payload) {
       commit('CHANGE_BLOCKS', payload);
+    },
+    async changeStateBookmark({ commit }, payload) {
+      commit('CHANGE_BOOKMARKS', payload);
     },
   },
   modules: {

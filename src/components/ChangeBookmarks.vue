@@ -1,6 +1,7 @@
 <template>
   <div>
     <!-- Blocks with links -->
+    <form-for-change v-if="FORM_CHANGE_STATE" />
 
     <Container
       orientation="horizontal"
@@ -96,6 +97,7 @@
 </template>
 
 <script>
+import FormForChange from '@/components/FormForChange.vue';
 import { mapGetters, mapActions } from 'vuex';
 import { Container, Draggable } from 'vue-smooth-dnd';
 
@@ -108,15 +110,21 @@ export default {
   components: {
     Container,
     Draggable,
+    FormForChange,
   },
   created() {
     this.blockState = JSON.parse(JSON.stringify(this.BLOCK_STATE));
   },
   computed: {
-    ...mapGetters(['SIZE_STATE', 'BLOCK_STATE']),
+    ...mapGetters(['SIZE_STATE', 'FORM_CHANGE_STATE', 'BLOCK_STATE']),
   },
   methods: {
-    ...mapActions(['changeStateBlocks', 'closeChangeComponents', 'openModal']),
+    ...mapActions([
+      'changeStateBlocks',
+      'closeChangeComponents',
+      'openModal',
+      'changeStateBookmark',
+    ]),
     removeLink(blockName, linkName, index) {
       this.blockState.value.find((block) => block.name === blockName).value.splice(index, 1);
     },
@@ -162,10 +170,8 @@ export default {
       this.closeChangeComponents();
     },
     async changeLink(block, link) {
+      await this.changeStateBookmark({ url: link.href, name: link.text });
       await this.openModal('isChangeFormVisible');
-      const form = document.querySelector('.change_bookmark_form');
-      form.children[0].value = link.text;
-      form.children[1].value = link.href;
     },
   },
 };

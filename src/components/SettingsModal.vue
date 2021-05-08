@@ -50,7 +50,7 @@
           />
         </div>
         <div class="bookmarks">
-          <h4>Changes in components</h4>
+          <h4>Links panel</h4>
           <div @click="changeComponentsExample" class="button">Change</div>
         </div>
       </div>
