@@ -26,7 +26,6 @@
             :style="{ fontSize: `${SIZE_STATE - 8}px` }"
             class="change icons-info"
             data-title="Change block"
-            @click="changeLink(link.text)"
           >
             <font-awesome-icon icon="edit" />
           </a>
@@ -65,7 +64,7 @@
                 href="#"
                 :style="{ fontSize: `${SIZE_STATE - 8}px` }"
                 class="change link icons-info"
-                @click="changeLink(blocks.name, link)"
+                @click="changeLink(blocks.name, link, index)"
                 data-title="Change link"
               >
                 <font-awesome-icon icon="edit" />
@@ -125,14 +124,17 @@ export default {
       'openModal',
       'changeStateBookmark',
     ]),
+
     removeLink(blockName, linkName, index) {
       this.blockState.value.find((block) => block.name === blockName).value.splice(index, 1);
     },
+
     handleDropBlock(dropResult) {
       const { removedIndex, addedIndex } = dropResult;
       const movedBlock = this.blockState.value.splice(removedIndex, 1);
       this.blockState.value.splice(addedIndex, 0, movedBlock[0]);
     },
+
     handleDragLinkStart(dragResult, blockName) {
       const { payload, isSource } = dragResult;
       if (isSource) {
@@ -145,6 +147,7 @@ export default {
         };
       }
     },
+
     handleDropLink(dropResult, blockName) {
       const { removedIndex, addedIndex } = dropResult;
       if (this.draggingLink.nameBlock === blockName && removedIndex === addedIndex) return;
@@ -159,18 +162,28 @@ export default {
           .value.splice(addedIndex, 0, this.draggingLink.link);
       }
     },
+
     getChildPayload(index) {
       return { index };
     },
+
     saveChanges() {
       this.changeStateBlocks(this.blockState);
       this.closeChangeComponents();
     },
+
     closeChanges() {
       this.closeChangeComponents();
     },
-    async changeLink(block, link) {
-      await this.changeStateBookmark({ url: link.href, name: link.text });
+
+    async changeLink(block, link, index) {
+      await this.changeStateBookmark({
+        url: link.href,
+        name: link.text,
+        blockState: this.blockState,
+        blockName: block,
+        index,
+      });
       await this.openModal('isChangeFormVisible');
     },
   },

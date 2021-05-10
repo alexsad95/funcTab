@@ -8,10 +8,7 @@ export default new Vuex.Store({
     isModalSettingsVisible: false,
     isChangeFormVisible: false,
     changeComponents: false,
-    changeBookmarks: {
-      url: '',
-      name: '',
-    },
+    changeBookmarks: {},
   },
   getters: {
     THEME_STATE(state) {
@@ -39,11 +36,8 @@ export default new Vuex.Store({
     FORM_CHANGE_STATE(state) {
       return state.isChangeFormVisible;
     },
-    BOOKMARKS_URL_STATE(state) {
-      return state.changeBookmarks.url;
-    },
-    BOOKMARKS_NAME_STATE(state) {
-      return state.changeBookmarks.name;
+    BOOKMARKS_CHANGE_STATE(state) {
+      return state.changeBookmarks;
     },
   },
   mutations: {

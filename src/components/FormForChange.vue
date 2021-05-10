@@ -37,41 +37,60 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'FormForChange',
   data: () => ({
-    blockState: {},
+    urlOldValue: '',
     urlValue: '',
     nameValue: '',
+    blockName: '',
+    blockState: {},
+    index: 0,
   }),
   created() {
-    this.blockState = JSON.parse(JSON.stringify(this.BLOCK_STATE));
-    this.urlValue = this.BOOKMARKS_URL_STATE;
-    this.nameValue = this.BOOKMARKS_NAME_STATE;
+    const {
+      url, name, blockName, blockState, index,
+    } = this.BOOKMARKS_CHANGE_STATE;
+
+    this.urlValue = url;
+    this.urlOldValue = url;
+    this.nameValue = name;
+    this.blockName = blockName;
+    this.blockState = blockState;
+    this.index = index;
   },
   computed: {
-    ...mapGetters([
-      'FONT_STATE',
-      'SIZE_STATE',
-      'BLOCK_STATE',
-      'BOOKMARKS_URL_STATE',
-      'BOOKMARKS_NAME_STATE',
-    ]),
+    ...mapGetters(['FONT_STATE', 'SIZE_STATE', 'BLOCK_STATE', 'BOOKMARKS_CHANGE_STATE']),
   },
   methods: {
     ...mapActions(['closeModal', 'saveLinksChanges', 'changeStateBlocks']),
-    close() {
-      this.closeModal('isChangeFormVisible');
+
+    async close() {
+      await this.closeModal('isChangeFormVisible');
     },
+
     changeUrl(event) {
-      console.log('changeUrl: ', event.target.value);
       this.urlValue = event.target.value;
     },
+
     changeName(event) {
-      console.log('changeName: ', event.target.value);
       this.nameValue = event.target.value;
     },
-    saveLink() {
-      console.log('url: ', this.urlValue);
-      console.log('name: ', this.nameValue);
-      console.log('blockState: ', this.blockState.value);
+
+    async saveLink() {
+      const currLink = this.blockState.value.find((block) => block.name === this.blockName).value[
+        this.index
+      ];
+
+      if (!this.urlValue) {
+        currLink.href = this.urlOldValue;
+      } else {
+        currLink.href = this.urlValue;
+      }
+
+      currLink.text = this.nameValue;
+      this.blockState.value.find((block) => block.name === this.blockName).value[
+        this.index
+      ] = currLink;
+
+      await this.close();
     },
   },
 };
