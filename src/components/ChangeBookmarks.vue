@@ -13,13 +13,26 @@
     >
       <Draggable class="blocks-bookmarks" v-for="(blocks, index) in blockState.value" :key="index">
         <p class="text" :style="{ fontSize: `${SIZE_STATE - 3}px` }">
-          <a href="#" class="column-drag-handle icons-info" :style="{ fontSize: `${SIZE_STATE - 8}px` }" data-title="Move block">
+          <a href="#"
+            class="column-drag-handle icons-info"
+            :style="{ fontSize: `${SIZE_STATE - 8}px` }"
+            data-title="Move block"
+          >
             <font-awesome-icon icon="arrows-alt" />
           </a>
-          <a href="#" :style="{ fontSize: `${SIZE_STATE - 8}px` }" class="change icons-info" data-title="Change block">
+          <a href="#"
+            :style="{ fontSize: `${SIZE_STATE - 8}px` }"
+            class="change icons-info"
+            data-title="Change block"
+          >
             <font-awesome-icon icon="edit" />
           </a>
-          <a href="#" :style="{ fontSize: `${SIZE_STATE - 8}px` }" class="remove icons-info" data-title="Remove block" @click="removeLink(link.text)">
+          <a href="#"
+            :style="{ fontSize: `${SIZE_STATE - 8}px` }"
+            class="remove icons-info"
+            data-title="Remove block"
+            @click="removeLink(link.text)"
+          >
             <font-awesome-icon icon="trash-alt" />
           </a>
           {{ blocks.name }}
@@ -36,7 +49,11 @@
         >
           <Draggable v-for="(link, index) in blocks.value" :key="index">
             <div class="blocks-bookmarks-cols">
-              <a href="#" class="column-drag-handle link icons-info" :style="{ fontSize: `${SIZE_STATE - 8}px` }" data-title="Move link">
+              <a href="#"
+                class="column-drag-handle link icons-info"
+                :style="{ fontSize: `${SIZE_STATE - 8}px` }"
+                data-title="Move link"
+              >
                 <font-awesome-icon icon="arrows-alt" />
               </a>
               <a
