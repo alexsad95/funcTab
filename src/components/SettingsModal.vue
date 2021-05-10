@@ -42,7 +42,7 @@
             type="number"
             id="font-size"
             name="quantity"
-            min="15"
+            min="17"
             max="26"
             @change="switchSize($event)"
             :value="size"
@@ -67,6 +67,7 @@ export default {
   name: 'SettingsModal',
   computed: {
     ...mapGetters(['THEME_STATE', 'FONT_STATE', 'SIZE_STATE']),
+
     themes: {
       get() {
         return this.THEME_STATE;
@@ -75,6 +76,7 @@ export default {
         this.THEME_STATE = newTheme;
       },
     },
+
     fonts: {
       get() {
         return this.FONT_STATE;
@@ -83,6 +85,7 @@ export default {
         this.FONT_STATE = newFont;
       },
     },
+
     size: {
       get() {
         return this.SIZE_STATE;
@@ -94,22 +97,28 @@ export default {
   },
   methods: {
     ...mapActions(['changeThemes', 'changeFonts', 'changeSize', 'closeModal', 'changeComponents']),
+
     closeSettingsModal() {
       this.closeModal('isModalSettingsVisible');
     },
+
     changeComponentsExample() {
       this.closeModal('isModalSettingsVisible');
       this.changeComponents();
     },
+
     switchTheme(event) {
       this.changeThemes(event.target.value);
     },
+
     switchFonts(event) {
       this.changeFonts(event.target.value);
     },
+
     switchSize(event) {
       this.changeSize(event.target.value);
     },
+
     switchSettings(settingName) {
       const tabline = document.getElementsByClassName('tablink');
       const x = document.getElementsByClassName('settings');

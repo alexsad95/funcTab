@@ -70,7 +70,7 @@ export default {
       this.openModal('isModalSettingsVisible');
     },
     testFuncOn() {
-      chrome.bookmarks.getTree((bookmarks) => this.printBookmarks(bookmarks));
+      chrome.bookmarks.getTree(bookmarks => this.printBookmarks(bookmarks));
     },
     printBookmarks(bookmarks) {
       console.log('bookmarks: ', bookmarks);

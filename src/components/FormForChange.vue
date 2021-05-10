@@ -46,7 +46,8 @@ export default {
   }),
   created() {
     const {
-      url, name, blockName, blockState, index,
+      url, name, blockName,
+      blockState, index,
     } = this.BOOKMARKS_CHANGE_STATE;
 
     this.urlValue = url;
@@ -75,20 +76,23 @@ export default {
     },
 
     async saveLink() {
-      const currLink = this.blockState.value.find((block) => block.name === this.blockName).value[
-        this.index
-      ];
+      // find mutable link
+      const currLink = this.blockState.value
+        .find(block => block.name === this.blockName)
+        .value[this.index];
 
+      // change variable for saving link
       if (!this.urlValue) {
         currLink.href = this.urlOldValue;
       } else {
         currLink.href = this.urlValue;
       }
-
       currLink.text = this.nameValue;
-      this.blockState.value.find((block) => block.name === this.blockName).value[
-        this.index
-      ] = currLink;
+
+      // change link in blockState
+      this.blockState.value
+        .find(block => block.name === this.blockName)
+        .value[this.index] = currLink;
 
       await this.close();
     },
