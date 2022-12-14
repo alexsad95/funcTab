@@ -12,11 +12,6 @@ funcTab - just Chrome extension with functional startup page. [Video how it work
 - [x] - Add FontAwesome icons
 - [x] - Add fonts and color themes, change this in settings
 - [x] - Add Vuex and localStorage, save some state in localStorage
-- [ ] - The ability to change the bookmarks component
-- [ ] - Add links from chrome bookmarks (also folders)
-- [ ] - Chrome favorite apps
-- [ ] - Clock component
-- [ ] - Commands in the search bar (for detailed site searches)
 
 #### Run extentions
 
